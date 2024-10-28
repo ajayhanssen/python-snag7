@@ -1,0 +1,28 @@
+﻿DATA_BLOCK "test_db"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+   STRUCT 
+      vx_scaled : Real;
+      vy_scaled : Real;
+      vz_scaled : Real;
+      bool_1 : Bool;
+      bool_2 : Bool;
+      bool_3 : Bool;
+      bool_4 : Bool;
+      int_1 : Int;
+      int_2 : Int;
+   END_STRUCT;
+
+
+BEGIN
+   vx_scaled := 4.0;
+   vy_scaled := 5.0;
+   vz_scaled := 6.0;
+   bool_2 := true;
+   bool_3 := true;
+   int_1 := 21;
+   int_2 := 74;
+
+END_DATA_BLOCK
+
