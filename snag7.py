@@ -1,6 +1,6 @@
 import re
 import snap7
-from snap7.util import get_real, set_real, get_int, set_int, get_bool, set_bool
+from snap7.util import get_real, set_real, get_int, set_int, get_bool, set_bool, get_uint, set_uint
 
 
 class PLCDataBlock:
@@ -13,7 +13,8 @@ class PLCDataBlock:
         self.data_types = {
             'Real': {'size': 4, 'read': get_real, 'write': set_real},
             'Int': {'size': 2, 'read': get_int, 'write': set_int},
-            'Bool': {'size': 1, 'read': get_bool, 'write': set_bool}
+            'Bool': {'size': 1, 'read': get_bool, 'write': set_bool},
+            'UInt': {'size': 2, 'read': get_uint, 'write': set_uint}
         }
         self._parse_db_file()
         self.refresh()
@@ -69,6 +70,12 @@ class PLCDataBlock:
                 self.data[var_name]['value'] = get_bool(db_data, offset, bit_offset)
             else:
                 self.data[var_name]['value'] = self.data_types[var_type]['read'](db_data, offset)
+
+    def read(self, var_name):
+        """Reads the value of a variable from the PLC."""
+        if var_name not in self.data:
+            raise ValueError(f"Variable {var_name} not found in the data block.")
+        return self.data[var_name]['value']
 
     def write(self, var_name, value):
         """Writes the value back to the PLC."""
@@ -127,7 +134,6 @@ if __name__ == "__main__":
     # Refresh data from PLC
     db1.refresh()
 
-
     # Access values
     print(db1.data['vx_scaled']['value'])
     print(db1.data['vy_scaled']['value'])
@@ -138,10 +144,6 @@ if __name__ == "__main__":
     print(db1.data['bool_4']['value'])
     print(db1.data['int_1']['value'])
     print(db1.data['int_2']['value'])
-
-
-    # Write a value back to the PLC
-    #db1.write('di_1', True)  # Example to write a boolean
 
     # Close connection
     plc.disconnect()

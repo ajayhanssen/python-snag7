@@ -1,0 +1,17 @@
+﻿DATA_BLOCK "DB_Main"
+{ S7_Optimized_Access := 'FALSE' }
+VERSION : 0.1
+NON_RETAIN
+   STRUCT 
+      r_setpoint_anemometer : Real;
+      r_scaled_AI_anemometer : Real;
+      b_control_man_aut : Bool;
+      b_fan_enable : Bool;
+      r_fan_power_percent : UInt;
+   END_STRUCT;
+
+
+BEGIN
+
+END_DATA_BLOCK
+
