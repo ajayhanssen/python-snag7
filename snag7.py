@@ -134,16 +134,8 @@ if __name__ == "__main__":
     # Refresh data from PLC
     db1.refresh()
 
-    # Access values
-    print(db1.data['vx_scaled']['value'])
-    print(db1.data['vy_scaled']['value'])
-    print(db1.data['vz_scaled']['value'])
-    print(db1.data['bool_1']['value'])
-    print(db1.data['bool_2']['value'])
-    print(db1.data['bool_3']['value'])
-    print(db1.data['bool_4']['value'])
-    print(db1.data['int_1']['value'])
-    print(db1.data['int_2']['value'])
+    # Read data from PLC
+    print(db1.read('vx_scaled'))
 
     # Close connection
     plc.disconnect()
